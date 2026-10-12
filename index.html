@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PROYECTO BULD - LAS DIOSAS PROTECTORAS - DANIEL REMESEIRO</title>
+    <style>
+        @page {
+            size: A4 portrait;
+            margin: 0;
+        }
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            font-family: 'Courier New', Courier, monospace;
+            background-color: #ffffff;
+            color: #111;
+            font-size: 13px;
+            line-height: 1.35;
+            -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
+        }
+        .page {
+            width: 210mm;
+            height: 297mm;
+            padding: 10mm 15mm 8mm 15mm;
+            margin: 0 auto;
+            background: #ffffff;
+            page-break-after: always;
+            page-break-inside: avoid;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            position: relative;
+        }
+        .page:last-of-type {
+            page-break-after: auto;
+        }
+        .header {
+            text-align: center;
+            border-bottom: 1.5px solid #111;
+            padding-bottom: 2mm;
+            margin-bottom: 3mm;
+        }
+        .header .title {
+            font-size: 18px;
+            font-weight: 900;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+        .header .subtitle {
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            color: #444;
+            margin-top: 1mm;
+        }
+        .item-single {
+            display: flex;
+            flex-direction: column;
+            border: 1px solid #111;
+            padding: 5mm 7mm;
+            background: #ffffff;
+            gap: 2.5mm;
+            flex-grow: 1;
+            justify-content: flex-start;
+        }
+        .piece-title {
+            font-size: 16px;
+            font-weight: 900;
+            letter-spacing: 1.5px;
+           
+            text-align: center;
+            border-bottom: 1px solid #111;
+            padding-bottom: 1.5mm;
+            margin-bottom: 1mm;
+        }
+        .intro-text {
+            font-size: 14px;
+            text-align: justify;
+            color: #111;
+            line-height: 1.3;
+            margin-bottom: 1.5mm;
+        }
+        .intro-section-title {
+            font-size: 13px;
+            font-weight: bold;
+            text-transform: uppercase;
+            border-bottom: 1px solid #aaa;
+            padding-bottom: 0.5mm;
+            margin-top: 1mm;
+            margin-bottom: 1.5mm;
+            color: #000;
+        }
+        .intro-bullets {
+            list-style-type: square;
+            padding-left: 4mm;
+            font-size: 12px;
+            line-height: 1.25;
+        }
+        .intro-bullets li {
+            margin-bottom: 1.5mm;
+            text-align: justify;
+        }
+        .haiku {
+            font-size: 14px !important;
+            font-weight: bold !important;
+            font-style: italic;
+            border-left: 3px solid #111;
+            padding-left: 4mm;
+            color: #000;
+            line-height: 1.3;
+        }
+        .image-container {
+            width: 100%;
+            height: 110mm;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #000;
+            margin: 2mm 0;
+            position: relative;
+        }
+        .image-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+        .watermark {
+            position: absolute;
+            bottom: 8px;
+            right: 12px;
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 11px;
+            font-family: 'Courier New', Courier, monospace;
+            font-weight: bold;
+            letter-spacing: 1px;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+            pointer-events: none;
+            user-select: none;
+        }
+        .curatorial-note {
+            font-size: 15px !important;
+            font-weight: normal;
+            text-align: justify;
+            color: #111;
+            line-height: 1.35;
+        }
+        .page-number {
+            text-align: right;
+            font-size: 10px;
+            color: #666;
+            margin-top: 1.5mm;
+        }
+        .print-action-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 2mm;
+        }
+        .btn-print {
+            background-color: #000;
+            color: #fff;
+            border: 1px solid #000;
+            padding: 6px 14px;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 11px;
+            font-weight: bold;
+            letter-spacing: 1px;
+            cursor: pointer;
+            text-transform: uppercase;
+        }
+        .btn-print:hover {
+            background-color: #333;
+        }
+        .footer {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            border-top: 1px solid #111;
+            margin-top: 2mm;
+            padding-top: 1.5mm;
+            font-size: 9.5px;
+            text-align: center;
+            letter-spacing: 0.5px;
+        }
+        .footer a {
+            color: #111;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .footer a:hover {
+            text-decoration: underline;
+        }
+        @media print {
+            body {
+                background: #ffffff !important;
+                background-color: #ffffff !important;
+            }
+            .page {
+                margin: 0;
+                box-shadow: none;
+                height: 297mm;
+                background: #ffffff !important;
+                background-color: #ffffff !important;
+            }
+            .item-single {
+                background: #ffffff !important;
+                background-color: #ffffff !important;
+                border: 1px solid #111;
+            }
+            .print-action-container {
+                display: none !important;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- PÁGINA INTRODUCTORIA I -->
+    <div class="page">
+        <header class="header">
+            <div class="title">PROYECTO BULD</div>
+            <div class="subtitle">· INTRODUCCIÓN Y CONTEXTO CRÍTICO (I) ·</div>
+        </header>
+
+        <div class="item-single">
+            <div class="piece-title">LA PATRIA DE LA BAYETA Y EL CORDÓN UMBILICAL</div>
+            <div class="intro-text">
+                Que la cuna de un español medio se prolongue hasta rozar los cuatro decenios no es una novedad, pero el sainete que hemos montado para justificarlo ya merece un capítulo en la historia de la sociología de andar por casa. Asistimos impasibles al triunfo de la hiperpaternidad, esa neurosis envuelta en papel de regalo donde la sobreprotección y el control continuo se disfrazan de abnegación cristiana.
+            </div>
+            <div class="intro-text">
+                Hablemos claro: hay barreras económicas feroces, una vivienda a precio de sangre de unicornio y un mercado laboral que invita a tirarse de un puente. De acuerdo. Pero debajo de la coartada inmobiliaria se esconde un pacto tácito de pura comodidad mutua. Por un lado, una estirpe de progenitores aterrorizados por el miedo al nido vacío que necesitan desesperadamente seguir sintiéndose útiles para no tener que mirarse a la cara el uno al otro; por el otro, unas criaturas creciditas que ahorran esfuerzo mientras le hacen el vacío a la madurez.
+            </div>
+            <div class="intro-text">
+                El resultado es un espectáculo dantesco de infantilización permanente. Criamos a adultos de cuarenta años incapaces de encajar una frustración sin llamar a mamá, parapetados en un egoísmo relacional que asume que el resto del mundo debe rendirles pleitesía y cubrirles los caprichos. Mientras tanto, ancianos desgastados asumen cargas físicas y emocionales que rozan el absurdo, frotando zócalos y haciendo tuppers como si el vigor les fuera en ello.
+            </div>
+            <div class="intro-text">
+                Desengañémonos de una vez: plancharle las camisas y desinfectarle el pasillo a un señorrango de cuatro décadas no es un acto de amor sublime, es un ejercicio de invalidez provocada. Cada vez que alguien le limpia el espacio a un adulto hecho y derecho, no le está protegiendo del mundo; le está limpiando la responsabilidad personal, amputándole la capacidad de convertirse, de una bendita vez, en un ser independiente.
+            </div>
+            <div class="intro-section-title">PROTOCOLO DE EMANCIPACIÓN TARDÍA</div>
+            <ul class="intro-bullets">
+                <li><strong>Aceptación del diagnóstico:</strong> La culpa no es amor, es una aduana emocional. Si sigues resolviéndole la vida a los 40, lo estás incapacitando.</li>
+                <li><strong>Cierre de la "Hostelería Mamá":</strong> Se acaban los tuppers congelados para la semana y las limpiezas generales de "apoyo". Quien no limpia su plato no valora el suelo.</li>
+                <li><strong>Fin del rescate financiero sutil:</strong> Diferenciar entre emergencias reales y subvencionar el nivel de vida. Cobrar un fijo de gastos si vive bajo tu techo es docencia básica.</li>
+                <li><strong>Soberanía del espacio propio:</strong> Establece normas estrictas de adulto a adulto. Si prefiere la comodidad del hogar, deberá pagar el precio de la convivencia entre iguales.</li>
+                <li><strong>El arte de decir "No lo sé, resuélvelo tú":</strong> Frente a cada queja o dilema doméstico, devuelve la pelota para romper la inercia del servicio de atención al cliente.</li>
+            </ul>
+        </div>
+        
+        <div class="page-number">Introducción - Página 1 de 2</div>
+    </div>
+
+    <!-- PÁGINA INTRODUCTORIA II -->
+    <div class="page">
+        <header class="header">
+            <div class="title">PROYECTO BULD</div>
+            <div class="subtitle">· INTRODUCCIÓN Y CONTEXTO CRÍTICO (II) ·</div>
+        </header>
+
+        <div class="item-single" style="gap: 1.5mm; justify-content: flex-start;">
+            <div class="piece-title">ANÁLISIS SOCIOECONÓMICO</div>
+
+            <div class="intro-section-title" style="margin-top: 1mm; margin-bottom: 1mm;">ANÁLISIS SOCIOECONÓMICO: PRECARIEDAD VS. COMODIDAD</div>
+            <ul class="intro-bullets">
+                <li><strong>El blindaje inmobiliario como coartada moral:</strong> La crisis económica se convierte en la excusa perfecta para enmascarar la falta de madurez y la incapacidad de gestión propia.</li>
+                <li><strong>El infantilismo de consumo:</strong> Destinar la renta propia a viajes, tecnología y ocio delegando los costes fijos de la vida (comida, suministros) a los padres.</li>
+                <li><strong>La trampa del bienestar heredado:</strong> La red familiar funciona como una droga blanda que alivia la presión económica inmediata pero anestesia la ambición y el riesgo.</li>
+                <li><strong>El coste de oportunidad para la generación sénior:</strong> Los padres merman sus propios fondos de retiro y calidad de vida para mantener el confort de sus retoños.</li>
+            </ul>
+        </div>
+        
+        <div class="page-number">Introducción - Página 2 de 2</div>
+    </div>
+
+    <!-- PÁGINA 1: HESTIA -->
+    <div class="page">
+        <header class="header">
+            <div class="title">PROYECTO BULD</div>
+            <div class="subtitle">· LAS DIOSAS PROTECTORAS ·</div>
+        </header>
+
+        <div class="item-single">
+            <div class="piece-title">HESTIA (Diosa griega del fuego del hogar y la familia)</div>
+            <div class="haiku">
+                Llega la ausencia,<br>
+                fregona en la penumbra,<br>
+                brilla el vestíbulo.
+            </div>
+            <div class="image-container">
+                <img src="image1.jpg" alt="HESTIA">
+                <div class="watermark">© Daniel Remeseiro</div>
+            </div>
+            <div class="curatorial-note">
+                Ahí la tienes: el altar doméstico desierto porque el niño se ha ido una semana a la playa a creerse independiente. Pero el hogar no descansa. La diosa Hestia no custodia llamas sagradas de Olimpo alguno, custodia el zócalo donde se acumula el polvo invisible. Con la excusa de un "para que no te encuentres esto hecho un desastre al volver", la madre entra en trance con el mocho y el bayeta-clean. Se criaron en el pulcro rigor, sí, pero la tentación de pasar el plumero por encima de sus vidas es una fe pagana a la que ninguna matriarca está dispuesta a renunciar.
+            </div>
+        </div>
+        
+        <div class="page-number">Página 1 de 6</div>
+    </div>
+
+    <!-- PÁGINA 2: VESTA -->
+    <div class="page">
+        <header class="header">
+            <div class="title">PROYECTO BULD</div>
+            <div class="subtitle">· LAS DIOSAS PROTECTORAS ·</div>
+        </header>
+
+        <div class="item-single">
+            <div class="piece-title">VESTA (Diosa romana. El fuego sagrado de Vesta no solo protegía las viviendas privadas, sino la seguridad misma del Imperio.)</div>
+            <div class="haiku">
+                Polvo fugaz,<br>
+                bayeta que no para,<br>
+                limpio el espacio.
+            </div>
+            <div class="image-container">
+                <img src="image2.jpg" alt="VESTA">
+                <div class="watermark">© Daniel Remeseiro</div>
+            </div>
+            <div class="curatorial-note">
+                Correr como si nos fuera la vida en ello para rascar esa grasa imperceptible del marco de la puerta. Mírala: movimiento rítmico, frenético, una ráfaga de vapor y lejía rascando sobre la madera pura. Vesta en pleno ejercicio de poder silencioso. Aprovechan que la casa se queda vacía, sin la presencia del hijo emancipado pero imperfecto, para reordenarle los armarios bajo la premisa del amor puro. Un amor que olvida que ellos ya tienen treinta años, pero que insiste en dejar las sábanas oliendo a suavizante de lavanda porque, al fin y al cabo, el verdadero templo se barre cuando nadie mira.
+            </div>
+        </div>
+        
+        <div class="page-number">Página 2 de 6</div>
+    </div>
+
+    <!-- PÁGINA 3: HERA -->
+    <div class="page">
+        <header class="header">
+            <div class="title">PROYECTO BULD</div>
+            <div class="subtitle">· LAS DIOSAS PROTECTORAS ·</div>
+        </header>
+
+        <div class="item-single">
+            <div class="piece-title">HERA (Diosa griega. Protectora del matrimonio, la maternidad y la fidelidad conyugal)</div>
+            <div class="haiku">
+                Sombra de escoba,<br>
+                barriendo la nostalgia,<br>
+                puro silencio.
+            </div>
+            <div class="image-container">
+                <img src="image3.jpg" alt="HERA">
+                <div class="watermark">© Daniel Remeseiro</div>
+            </div>
+            <div class="curatorial-note">
+                No son espectros ni alucinaciones; es la figura materna multiplicándose en el espejo de la entrada mientras sacude las alfombras del pasillo. Basta que crucen la puerta rumbo a sus vacaciones para que la casa se convierta en una catedral de silencio que hay que purificar. No hay resentimiento en el gesto, qué va: hay esa satisfacción casi carnal de mover el sofá, encontrar la calceta perdida de hace tres meses y devolverle a la estancia la dignidad que los hijos, en su caótica juventud, no alcanzan a comprender.
+            </div>
+        </div>
+        
+        <div class="page-number">Página 3 de 6</div>
+    </div>
+
+    <!-- PÁGINA 4: LARES -->
+    <div class="page">
+        <header class="header">
+            <div class="title">PROYECTO BULD</div>
+            <div class="subtitle">· LAS DIOSAS PROTECTORAS ·</div>
+        </header>
+
+        <div class="item-single">
+            <div class="piece-title">LARES (Deidad romana. Aseguraban la prosperidad y la protección del hogar frente a peligros externos.)</div>
+            <div class="haiku">
+                Orden y luz,<br>
+                las manos invisibles,<br>
+                vuelve la paz.
+            </div>
+            <div class="image-container">
+                <img src="image4.jpg" alt="LARES">
+                <div class="watermark">© Daniel Remeseiro</div>
+            </div>
+            <div class="curatorial-note">
+                Mira si no hay devoción en esta bata que ondea entre las cortinas abiertas de par en par para que corra el aire. Los dioses Lares de esta era no piden sacrificios de cordero, piden limpiar las rejillas de la campana extractora con vinagre y bicarbonato. Es la danza alegre y rabiosamente libre de quien reina sobre cuatro paredes sin que nadie la interrumpa con un "¿dónde está mi camiseta azul?". Un acto de amor absoluto, invasivo y glorioso que deja el ambiente tan impoluto que da casi pena volver a pisarlo.
+            </div>
+        </div>
+        
+        <div class="page-number">Página 4 de 6</div>
+    </div>
+
+    <!-- PÁGINA 5: PENATE -->
+    <div class="page">
+        <header class="header">
+            <div class="title">PROYECTO BULD</div>
+            <div class="subtitle">· LAS DIOSAS PROTECTORAS ·</div>
+        </header>
+
+        <div class="item-single">
+            <div class="piece-title">PENATE (Deidad romana. Aseguraban que nunca faltara el alimento ni el sustento dentro de la vivienda.)</div>
+            <div class="haiku">
+                Trazos de cera,<br>
+                protegen el descanso,<br>
+                sábana blanca.
+            </div>
+            <div class="image-container">
+                <img src="image5.jpg" alt="PENATE">
+                <div class="watermark">© Daniel Remeseiro</div>
+            </div>
+            <div class="curatorial-note">
+                El brillo del barniz lo cubre todo, protegiendo las baldosas como si fueran reliquias medievales. Penate no guarda los víveres del granero, guarda los tuppers en el congelador para cuando el retoño regrese agotado de su viaje. Hay una ternura socarrona en este afán por dejar las estanterías alineadas al milímetro; una forma sutil de decir "aquí sigo mandando yo", disfrazada de impecable cortesía y olor a cera de abejas.
+            </div>
+        </div>
+        
+        <div class="page-number">Página 5 de 6</div>
+    </div>
+
+    <!-- PÁGINA 6: ARTEMISA -->
+    <div class="page">
+        <header class="header">
+            <div class="title">PROYECTO BULD</div>
+            <div class="subtitle">· LAS DIOSAS PROTECTORAS ·</div>
+        </header>
+
+        <div class="item-single">
+            <div class="piece-title">ARTEMISA (Diosa griega.Aunque asociada a la naturaleza silvestre, actuaba como protectora del parto, las mujeres jóvenes y los niños.)</div>
+            <div class="haiku">
+                Calma final,<br>
+                el hogar en su sitio,<br>
+                misión cumplida.
+            </div>
+            <div class="image-container">
+                <img src="image6.jpg" alt="ARTEMISA">
+                <div class="watermark">© Daniel Remeseiro</div>
+            </div>
+            <div class="curatorial-note">
+                El trabajo ha terminado y el suelo refleja la luz del atardecer sin una sola huella. Artemisa contempla su cacería de pelusas con la calma de quien ha restaurado el equilibrio del universo antes de que el timbre vuelva a sonar. Se sentará en el sillón a disfrutar del aroma a limpio durante diez minutos exactos antes de marcharse. Mañana ellos volverán, soltarán la maleta en medio del salón y el ciclo comenzará de nuevo. Pero hoy, en esta penumbra perfecta, la casa es un santuario infranqueable.
+            </div>
+        </div>
+
+        <div class="print-action-container">
+            <button class="btn-print" onclick="window.print();">IMPRIMIR / GENERAR PDF</button>
+        </div>
+
+        <div class="footer">
+            <div><a href="mailto:dremeseiro@gmail.com">dremeseiro@gmail.com</a> | <a href="https://wa.me/34654391870" target="_blank">WhatsApp</a> | <a href="https://www.danielremeseiro.es" target="_blank">www.danielremeseiro.es</a></div>
+            <div>© DANIEL REMESEIRO · PROYECTO BULD · SOCIEDAD ERRANTE</div>
+            <div>A CORUÑA, GALICIA</div>
+        </div>
+        <div class="page-number">Página 6 de 6</div>
+    </div>
+
+</body>
+</html>
